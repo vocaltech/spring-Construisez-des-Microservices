@@ -1,3 +1,11 @@
+### VOCALTECH - begin ###
+/.gradle
+gradle
+gradlew.bat
+settings.gradle
+### VOCALTECH - end ###
+
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
