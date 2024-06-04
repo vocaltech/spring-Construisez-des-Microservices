@@ -35,10 +35,10 @@ public class OpenApiConfig {
         License mitLicense = new License().name("MIT License").url("https://choosealicense.com/licenses/mit/");
 
         Info info = new Info()
-                .title("Spring Ecommerce API")
+                .title("Micrommerce API")
                 .version("1.0")
                 .contact(contact)
-                .description("API endpoints for Spring Ecommerce")
+                .description("API endpoints for Micrommerce")
                 .termsOfService("")
                 .license(mitLicense);
 
