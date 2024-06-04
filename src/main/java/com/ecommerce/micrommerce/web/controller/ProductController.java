@@ -3,16 +3,20 @@ package com.ecommerce.micrommerce.web.controller;
 import com.ecommerce.micrommerce.web.dao.ProductDao;
 import com.ecommerce.micrommerce.web.exceptions.ProduitIntrouvableException;
 import com.ecommerce.micrommerce.web.model.Product;
+import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import jakarta.validation.Valid;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
 public class ProductController {
+    private static Logger log = LoggerFactory.getLogger(ProductController.class);
     private final ProductDao productDao;
     public ProductController(ProductDao productDao) {
         this.productDao = productDao;
@@ -53,5 +57,18 @@ public class ProductController {
                 .buildAndExpand(productAdded.getId())
                 .toUri();
         return ResponseEntity.created(location).build();
+    }
+
+    @GetMapping(value = "/AdminProduits")
+    public HashMap<Product, Integer> calculerMargeProduit() {
+        HashMap<Product, Integer> hm = new HashMap<>();
+
+        var products = productDao.findAll();
+        products.forEach(product -> {
+            int marge = product.getPrix() - product.getPrixAchat();
+            log.info(String.format("%s: %d", product.toString(), marge));
+            hm.put(product, marge);
+        });
+        return hm;
     }
 }
