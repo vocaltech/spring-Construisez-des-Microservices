@@ -71,4 +71,9 @@ public class ProductController {
         });
         return hm;
     }
+
+    @GetMapping(value = "/triProduits")
+    public List<Product> trierProduitsParOrdreAlphabetique() {
+        return productDao.findByOrderByNomAsc();
+    }
 }
